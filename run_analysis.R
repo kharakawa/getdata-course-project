@@ -128,4 +128,4 @@ colnames(selected_data) <-
 selected_data = data.table(selected_data)
 average_data = selected_data[, lapply(.SD, mean), by=c('Activity', 'SubjectId')]
 
-write.table(average_data, 'tidy_data.tsv', sep='\t')
+write.table(average_data, 'tidy_data.txt', sep='\t')
