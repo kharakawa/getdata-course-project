@@ -14,9 +14,9 @@ The original data set is not contained in this repository, so you have to downlo
   
 Note that, the unzipped directory ( UCI HAR Dataset/ ) have to be in the current working directory when you run the script.
 
-After downloading and extracting the data set into the current working directory, you can reproduce the tidy data set, just by executing the R scipt as follows:
+After downloading and extracting the data set into the current working directory, you can reproduce the tidy data set, just by executing the R script as follows:
 
-    R CMD BATCH /path/to/run_analysis.R
+    R CMD BATCH run_analysis.R
 
 The command produces `tidy_data.tsv` in the current directory. This is a standard tab separated text file, which can be read into R by read.table(). Variables in the file is described in CodeBook.md.
 
@@ -34,13 +34,13 @@ This project has following files:
 The run_analysis.R script do some analysis and transformations on the data set. The following is the steps taken in the script to produce the final tidy data set.
 
 
-1. (After loding original files into R environment, ) Merges the training and the test sets to create one data set.
+1. (After loading original files into R environment, ) Merges the training and the test sets to create one data set.
 2. Extracts only the measurements on the mean and standard deviation for each measurement. 
 3. Uses descriptive activity names to name the activities in the data set
 4. Appropriately labels the data set with descriptive variable names. 
 5. Creates a second, independent tidy data set with the average of each variable for each activity and each subject. 
 
-On step 2, 3, 4, some judgements have been made to determine the deatils of the process, for example, "Which column shoud be extracted from original?", or "What kind of name should be used to name columns in new data set?", and so on. These judgements are explained in the sections below.
+On step 2, 3, 4, some judgements have been made to determine the details of the process, for example, "Which column should be extracted from original?", or "What kind of name should be used to name columns in new data set?", and so on. These judgements are explained in the sections below.
 
 ### Extracted mean and standard deviation columns (on Setp 2)
 
@@ -53,15 +53,15 @@ The latter rule is to exclude columns like 'angle(tBodyAccMean,gravity)', becaus
 
 ### Descriptive activity names (on Step 3)
 
-On this step, activity codes extracted from `y_train.txt` and `y_test.txt` are converted into human readable labels stated in `activity_labels.txt` (all these files are provided with the original data set). Labels are lowered and repleced underscores with whitespaces along the way (resuls in 'walking' or 'walking upstairs', and so on).
+On this step, activity codes extracted from `y_train.txt` and `y_test.txt` are converted into human readable labels stated in `activity_labels.txt` (all these files are provided with the original data set). Labels are lowered and replaced underscores with whitespaces along the way (results in 'walking' or 'walking upstairs', and so on).
 
 ### Descriptive variable (column) names (on Setp 4)
 
-On the forth step, variable names are converted into more descriptive ones. In this instance, [Camel Case] [3] is chosen as a naming rule, because original variable names are relatively long, and the 'alllowercase' names are considerd not good for read. Main conversion rules of conversin are the following:
+On the forth step, variable names are converted into more descriptive ones. In this instance, [Camel Case] [3] is chosen as a naming rule, because original variable names are relatively long, and the 'alllowercase' names are considered not good for read. Main conversion rules are the following:
 
-  1. fix some typos in original column names (see code for deatails).
+  1. fix some typos in original column names (see code for details).
   2. prefixes 't' and 'f' are replaced with 'Time' and 'Freq', respectively.
-  3. shorthand forms 'Acc' and 'Mag' are replaced with corresponding longer forms 'Accelaration' and 'Magnitude'.
+  3. shorthand forms 'Acc' and 'Mag' are replaced with corresponding longer forms 'Acceleration' and 'Magnitude'.
   4. '-functionName()' and '-X' are converted into 'FunctionName' and 'X', to conform to Camel Case.
 
 [1]: http://archive.ics.uci.edu/ml/datasets/Human+Activity+Recognition+Using+Smartphones
